@@ -6,19 +6,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+interface  obj{
+    name : String,
+    age :  Number,
+}
+import { defineComponent ,reactive} from 'vue';
+import _ from 'lodash';
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String,
   },
   setup(){
+     let value: obj=  reactive({
+          name:'',
+          age : 0
+     });
 
-    function test( value:String) {
-      console.log(value);
-    }
+     const test = ()=>{
+         let age = _.get(value,'age',18);
+         console.log(age);
+     };
 
-  }
+     test();
+  },
 });
 </script>
 

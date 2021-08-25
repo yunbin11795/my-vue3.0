@@ -1,3 +1,5 @@
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+
 module.exports ={
 
     publicPath:'/',//资源公共路径
@@ -6,16 +8,8 @@ module.exports ={
 
     assetsDir:'assets',//静态资源目录
 
-    configureWebpack: config => {  //webpack 配置,可以是对象或函数,通过配置替换webpack对象
-        if (process.env.NODE_ENV === 'production') {
-            // 为生产环境修改配置...
-        } else {
-            // 为开发环境修改配置...
-        }
-    },
-
     chainWebpack: config => { //webpack 链式调用修改配置
-        //webpack 链式调用修改配置
+        config.plugin("loadshReplace").use(new LodashModuleReplacementPlugin());
     },
 
     css:{
