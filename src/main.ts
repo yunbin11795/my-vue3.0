@@ -3,7 +3,6 @@ import {ElButton, ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotifi
 import './theme.scss';
 import App from './App.vue';
 
-
 const components = [
     ElButton, ElRadio,
 ];

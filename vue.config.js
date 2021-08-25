@@ -15,7 +15,7 @@ module.exports ={
     },
 
     chainWebpack: config => { //webpack 链式调用修改配置
-
+        //webpack 链式调用修改配置
     },
 
     css:{
@@ -27,9 +27,11 @@ module.exports ={
     },
 
     devServer:{
-        '/rest': {
-            target: 'http://localhost',
-            changeOrigin: true
-        },
+        proxy:{
+            '/rest': {
+                target: 'http://localhost',
+                changeOrigin: true
+            },
+        }
     }
 };
