@@ -9,7 +9,12 @@ module.exports ={
     assetsDir:'assets',//静态资源目录
 
     chainWebpack: config => { //webpack 链式调用修改配置
-        config.plugin("loadshReplace").use(new LodashModuleReplacementPlugin());
+        config
+        .when(process.env.NODE_ENV === 'production',
+            config => config.devtool(false),
+            config => config.devtool('source-map')
+        )
+        .plugin("lodashReplace").use(new LodashModuleReplacementPlugin());
     },
 
     css:{
@@ -21,6 +26,7 @@ module.exports ={
     },
 
     devServer:{
+        open:true,
         proxy:{
             '/rest': {
                 target: 'http://localhost',

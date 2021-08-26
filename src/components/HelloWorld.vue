@@ -30,8 +30,7 @@ export default defineComponent({
      let number = ref(0);
 
      const test = ()=>{
-         let age = _.get(value,'age',18);
-         console.log(age);
+       console.log(process.env)
      };
 
      test();

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode prod",
+    "build:dev": "vue-cli-service build --mode dev",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "start": "vue-cli-service serve"
@@ -15,7 +16,8 @@
     "lodash": "^4.17.21",
     "sass": "^1.38.0",
     "sass-loader": "10.1.1",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -25,6 +27,7 @@
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-plugin-typescript": "^4.5.13",
     "@vue/cli-plugin-unit-mocha": "^4.5.13",
     "@vue/cli-service": "~4.5.0",

@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import {ElButton, ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotification, ElRadio,} from 'element-plus';
 import './theme.scss';
 import App from './App.vue';
+import router from './router'
 
 const components = [
     ElButton, ElRadio,
@@ -14,7 +15,7 @@ const plugins = [
     ElNotification,
 ];
 
-const app = createApp(App);
+const app = createApp(App).use(router);
 
 components.forEach(component => {
     app.component(component.name, component)
