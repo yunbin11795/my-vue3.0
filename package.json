@@ -5,9 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode prod",
-    "build:dev": "vue-cli-service build --mode dev",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "build:dev": "vue-cli-service build --mode dev",
     "start": "vue-cli-service serve"
   },
   "dependencies": {
@@ -35,13 +35,15 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-lodash": "^3.3.4",
     "chai": "^4.1.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "lodash-webpack-plugin": "^0.11.6",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "vue-cli-plugin-element-plus": "0.0.13"
   },
   "browserslist": [
     "> 1%",
