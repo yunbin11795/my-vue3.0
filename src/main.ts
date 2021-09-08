@@ -6,4 +6,5 @@ import router from './router'
 
 const app = createApp(App).use(router);
 installElementPlus(app);
+
 app.mount('#app');

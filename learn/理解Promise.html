@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>理解Promise</title>
+</head>
+<body>
+<script>
+
+    const reject = Symbol('reject');
+    const resolve = Symbol('resolve');
+
+    class _Promise{
+
+        constructor(executor) {
+            // 状态描述 pending resolved rejected
+            this.state = 'pending';
+
+            //成功结果
+            this.value = undefined;
+            //保存成功的回调
+            this.onResolvedCallbacks = [];
+
+            //失败结果
+            this.reason = undefined;
+            //保存失败的回调
+            this.onRejectedCallbacks = [];
+
+            try{
+                executor(this[resolve].bind(this),this[reject].bind(this))
+            }catch (e) {
+                this[reject](e);
+            }
+        }
+
+
+        [resolve](value){  //用symbol定义私有方法
+            if(this.state === 'pending'){
+                this.value = value;
+                this.state = 'resolved';
+                this.onResolvedCallbacks.forEach((cb)=>{
+                    cb(value);
+                })
+            }
+        }
+
+        [reject](reason){
+
+            if(this.state === 'pending'){
+                this.reason = reason;
+                this.state = 'rejected';
+
+                this.onRejectedCallbacks.forEach((cb)=>{
+                    cb(reason);
+                })
+            }
+        }
+
+        then(onFulfilled,onRejected){
+             // 新增等待态判断，此时异步代码还未走完，回调入数组队列
+            
+            onRejected = typeof onFulfilled === 'function'?onFulfilled:(value)=>value;
+            
+            onRejected = typeof onRejected === 'function'? onRejected: (err) => { throw err};
+
+            
+            let promise2 = new _Promise((resolve,reject)=>{
+                
+                if(this.state === 'pending'){
+                    this.onResolvedCallbacks.push(()=>{
+                        queueMicrotask(() => {
+                            try{
+                                let x = onFulfilled(this.value);
+                                this.resolvePromise(promise2, x, resolve, reject)
+                            }catch (e) {
+                                reject(e);
+                            }
+                        });
+
+                    });
+
+                    this.onRejectedCallbacks.push(()=>{
+                        queueMicrotask(() => {
+                            try{
+                                let x = onFulfilled(this.value);
+                                this.resolvePromise(promise2, x, resolve, reject)
+                            }catch (e) {
+                                reject(e);
+                            }
+                        })
+                    });
+                }
+                
+                if(this.state === 'resolved'){
+                    queueMicrotask(() => {
+                        try{
+                            // 拿到返回值resolve出去
+                            let x = onFulfilled(this.value);
+                            this.resolvePromise(promise2, x, resolve, reject)
+                        }catch (e) {
+                            reject(e);
+                        }
+                    });
+
+                }
+
+                if(this.state === 'rejected'){
+                    queueMicrotask(() => {
+                        try {
+                            let x = onRejected(this.reason);
+                            this.resolvePromise(promise2, x, resolve, reject)
+                        } catch (e) {
+                            reject(e)
+                        }
+                    })
+                }
+                
+            });
+            
+            return promise2;
+        }
+
+        /**
+         * 解析then返回值与新Promise对象
+         * @param {Object} promise2，就是我们创建的promise2实例
+         * @param {*} x 上一个then的返回值
+         * @param {Function} resolve promise2处理器函数的resolve
+         * @param {Function} reject promise2处理器函数的reject
+         */
+
+        resolvePromise(promise2, x, resolve, reject){
+             if(promise2 === x){
+                 reject(new TypeError('请避免Promise循环引用'))
+             }
+
+             let called;
+             if(x !== null && (typeof x === 'object' || typeof x === 'function')){
+                 // 可能是个对象或是函数
+                 try{
+                     let then = x.then;
+                     if(typeof then === 'function'){
+                         // then是function，那么执行Promise
+                         then.call(x,(y)=>{
+                             if(called) return;
+                             called = true;
+                             // 递归调用，传入y若是Promise对象，继续循环
+                             resolvePromise(promise2, y, resolve, reject)
+                         },(r)=>{
+                             if (called) return;
+                             called = true;
+                             reject(r);
+                         })
+                     }else{
+                         resolve(x)
+                     }
+                 }catch (e) {
+                     if (called) return;
+                     called = true;
+                     reject(e);
+                 }
+             }else{
+                 // 是个普通值
+                 resolve(x)
+             }
+        }
+
+        catch(onRejected){
+            return this.then(null, onRejected)
+        }
+    }
+
+    let p = new _Promise((resolve,reject)=>{
+           setTimeout(()=>{
+               resolve(1);
+           },1000);
+    });
+    p.then((data)=>{
+        console.log(data + 2);
+    });
+
+
+    new Promise((reslove, reject) => {
+        setTimeout(() => {
+            console.log(10);
+        }, 2000);
+        setTimeout(() => {
+            console.log(20);
+        }, 1000);
+        reslove();
+    }).then(() => {
+        console.log(1);
+        return new Promise((reslove, reject) => {
+            console.log('1-1');
+            setTimeout(() => {
+                console.log(30);
+                reslove();
+            }, 500);
+        });
+    }).then(() => {
+        console.log(2);
+        return new Promise((reslove, reject) => {
+            console.log('2-1');
+            setTimeout(() => {
+                console.log(40);
+                reslove();
+            }, 200);
+        });
+    }).then(() => {
+        console.log(3);
+    });
+
+</script>
+</body>
+</html>
+
+
+
+
+
