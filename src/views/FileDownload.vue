@@ -1,6 +1,7 @@
 <template>
     <span>文件下载</span>
-    <TreeTable :tableData="tableData"></TreeTable>
+    <TreeTable :tableData="tableData" :disabled="true"
+               @change="test($event)"></TreeTable>
 </template>
 
 <script>
@@ -125,8 +126,13 @@
                 },
             ];
 
+            const test = (e)=>{
+               console.log(e);
+               alert(22);
+            };
             return {
-                tableData
+                tableData,
+                test
             }
         }
     }

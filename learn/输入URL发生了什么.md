@@ -32,6 +32,17 @@
          UDP特点:① 面向无连接 ②有单播，多播，广播 ③面向报文，不对报文进行处理 ④不可靠性，受网络环境影响 ⑤头部开销小，传输数据报文高效(在某些实时要求高的场景(电话会议)就用到)  
       2. TCP协议  
          是传输控制协议是一种面向连接的、可靠的、基于字节流的传输层通信协议。
-         1.  TCP三次握手  
-             
+         1.  TCP三次握手   其实就是指建立一个TCP连接时，需要客户端和服务器总共发送3个包。
+                           进行三次握手的主要作用就是为了确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号为后面的可靠性传送做准备  
+                           刚开始，客户端处于close状态,服务端处于listen状态
+              SYN:是一段数据报文
+              ISN:初始化序列号,序列号用于判断连接是否正确
+              seq:序列号
+              ack:确认号，表示期望收到的下一个字节的序号。ack=发起方seq+1
+              ACK:确认状态，为1是表示数据正常收到
+              ![三次握手](https://img-blog.csdn.net/20180808105159546?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bjIwMTY0MjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)                  
+              1. 第一次握手：客户端发送一个SYN报文，并指明客户端的ISN，客户端处于SYN_SENT状态
+              2. 第二次握手：服务端收到客户端的SYN报文后，会发送一个SYN报文，指定服务端的ISN，把ISN + 1作为ACK的值一起发送，服务端处于SYN_RCVD状态
+              3. 第三次握手：客户端收到服务端的SYN报文后，会发送一个SYN报文，把ISN + 1作为ACK的值一起发送，客户端处于ESTABLISHED状态，收到报文后，服务端处于ESTABLISHED状态  
+              ![四次挥手](https://pics5.baidu.com/feed/48540923dd54564e5260495ce0006487d0584fb6.jpeg?token=c3a743af38e25ff66deb6a07891be58e&s=C584FC1A71CFF4EE1A75A45203007073)
       

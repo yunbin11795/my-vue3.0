@@ -1,0 +1,13 @@
+diff --git a/node_modules/lodash/_equalArrays.js b/node_modules/lodash/_equalArrays.js
+index 824228c..d1257ee 100644
+--- a/node_modules/lodash/_equalArrays.js
++++ b/node_modules/lodash/_equalArrays.js
+@@ -5,7 +5,7 @@ var SetCache = require('./_SetCache'),
+ /** Used to compose bitmasks for value comparisons. */
+ var COMPARE_PARTIAL_FLAG = 1,
+     COMPARE_UNORDERED_FLAG = 2;
+-
++console.log('lodash 修改')
+ /**
+  * A specialized version of `baseIsEqualDeep` for arrays with support for
+  * partial deep comparisons.

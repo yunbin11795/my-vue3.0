@@ -1,5 +1,10 @@
 <template>
     <div class="tree-table">
+        <el-radio-group v-model="radio" v-bind:="$attrs">
+            <el-radio :label="3" v-bind:="$attrs">备选项</el-radio>
+            <el-radio :label="6">备选项</el-radio>
+            <el-radio :label="9">备选项</el-radio>
+        </el-radio-group>
         <el-table
                  :data="tableData"
                  row-key="directoryId"
@@ -45,7 +50,7 @@
 </template>
 
 <script lang="ts">
-    import {defineComponent,computed} from 'vue';
+    import {defineComponent,computed,} from 'vue';
     import {filterFrom,Transformation} from '@/unit/filter';
     import dayjs from 'dayjs';
     export default defineComponent({
