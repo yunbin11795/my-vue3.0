@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器合成层</title>
+    <style>
+        @keyframes test {
+            0%   {transform: translateX(0px)}
+            50%  {transform: translateX(10px)}
+            100% {transform: translateX(0px)}
+        }
+        .title{
+            width: 100px;
+            height: 100px;
+            background: red;
+            animation: test 1s infinite;
+            position: static;
+            z-index: 1;
+        }
+        li{
+            position: relative;
+            z-index: 6;
+        }
+        li span{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="title">
+
+</div>
+<ul>
+    <li>
+        <span>1222</span>
+    </li>
+    <li>
+        <span>1222</span>
+    </li>
+    <li>
+        <span>1222</span>
+    </li>
+</ul>
+
+</body>
+</html>

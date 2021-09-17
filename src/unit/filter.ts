@@ -31,6 +31,6 @@ export const Transformation = (limit:number)=>{
         return size;
 };
 
-export  const format =(time:string,) =>{
-
-};
+export  function test<T extends String>(value:T) {
+    console.log(value.substring(0,1))
+}

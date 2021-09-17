@@ -1,16 +1,17 @@
 <template>
     <span>文件下载</span>
-    <TreeTable :tableData="tableData" :disabled="true"
-               @change="test($event)"></TreeTable>
+    <VirtualList></VirtualList>
+
 </template>
 
 <script>
     import TreeTable from '@/components/TreeTable.vue'
+    import VirtualList from '@/components/VirtualList.vue'
     import {setup} from 'vue';
     export default {
         name: "FileDownload",
         components:{
-            TreeTable
+            VirtualList
         },
         setup(){
             const tableData =[ // 初始化目录树列表数据
