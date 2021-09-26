@@ -1,10 +1,10 @@
 <template>
   <div class="hello"  >
-    <el-button>默认按钮</el-button>
+    <el-button v-test="5555">默认按钮</el-button>
     <el-radio v-model="radio" label="2">备选项</el-radio>
     {{msg}}
     <button @click="add()">{{number}}</button>
-    <div class="test"></div>
+    <div class="test" ></div>
   </div>
 </template>
 
@@ -14,10 +14,12 @@ interface  obj{
     age :  Number,
 }
 
+
 import { defineComponent ,reactive,inject,ref,createApp,onMounted,watch} from 'vue';
 import _ from 'lodash';
+import {useStore,mapState} from 'vuex';
 import VirtualList from './VirtualList.vue';
-
+import {makeCustomer} from '@/unit/filter'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
@@ -43,18 +45,19 @@ export default defineComponent({
 
      let obj = reactive({count:0})
 
-    watch(()=>{
-      return obj.count;
-    },(newValue,oldValue)=>{
-        console.log(newValue,oldValue);
-    })
+      watch(()=>{
+        return obj.count;
+      },(newValue,oldValue)=>{
+          console.log(newValue,oldValue);
+      })
 
-     const test = <T extends {}> ()=>{
-       console.log(process.env)
-     };
+       const test = <T extends {}> ()=>{
+         console.log(process.env)
+       };
 
 
      test();
+
 
      const add = ()=>{
        number.value ++;
@@ -62,6 +65,12 @@ export default defineComponent({
        console.log(obj);
        content.emit('my-event');
      };
+
+     const store =useStore();
+     store.commit('test/increment');
+     console.log(store.getters['test/doubleCount']);
+
+    console.log(makeCustomer({id:1,kind:'1'}))
 
      return {
        number,

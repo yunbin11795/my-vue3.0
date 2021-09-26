@@ -34,3 +34,51 @@ export const Transformation = (limit:number)=>{
 export  function test<T extends String>(value:T) {
     console.log(value.substring(0,1))
 }
+
+
+type User = {
+    id:number,
+    kind:string
+}
+export function makeCustomer<T extends User>(u:T):T{
+    return {
+        ...u,
+        id: u.id,
+        kind: 'customer'
+    }
+}
+
+
+function f(a:string,b:string):string;
+function f(a:number,b:number):number;
+
+function f(a: string | number, b: string | number):string | number{
+    // if (typeof a === 'string') {
+    //     return a + ':' + b; // no error but b can be number!
+    // } else {
+    //     return a + b; // error as b can be number | string
+    // }
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a + ':' + b;
+    } else {
+        return a + b
+    }
+}
+
+
+type Foo = {
+    a: number;
+    b?: string;
+    c: boolean;
+}
+
+function getValues<T, K extends keyof T>(obj:T, keys:K[]) {
+    return keys.map(key => obj[key])
+}
+
+const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+}
+console.log(getValues(obj, ['a', 'b']))

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //发布者
+    class Dep{
+        constructor(){
+            //存放观察者对象
+            this.subs = [];
+        }
+        addSubs(sub){
+            //判断参数是否存在，且收集来的观察者需要有
+            if(sub && sub.update){
+                this.subs.push(sub);
+            }
+        }
+        notify(){
+            this.subs.forEach(sub=>{
+                sub.update();
+            })
+        }
+    }
+</script>
+</body>
+</html>
