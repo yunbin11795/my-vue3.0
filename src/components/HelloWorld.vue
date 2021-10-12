@@ -5,6 +5,9 @@
     {{msg}}
     <button @click="add()">{{number}}</button>
     <div class="test" ></div>
+    <transition name="aan">
+    123
+    </transition>
   </div>
 </template>
 
@@ -84,7 +87,4 @@ export default defineComponent({
 <style scoped lang="scss">
   $primary: #fff;
 
-  div{
-
-  }
 </style>

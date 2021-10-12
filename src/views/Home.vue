@@ -15,7 +15,6 @@ export default {
     HelloWorld
   },
   setup(props,content){
-
     const doSomething = ()=>{
       console.log('doSomething');
     };

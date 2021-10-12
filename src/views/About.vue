@@ -1,5 +1,22 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+     <AnimateList></AnimateList>
   </div>
 </template>
+
+<script lang="ts">
+   import AnimateList from '@/components/AnimateList.vue'
+   export default {
+       name:'About',
+        components:{
+         AnimateList
+       },
+       setup(){
+
+       }
+   }
+</script>
+
+<style scoped>
+
+</style>
