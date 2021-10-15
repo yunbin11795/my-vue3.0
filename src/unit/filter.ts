@@ -1,6 +1,5 @@
 
 
-
 export const filterFrom = (value:string|number,items:Array<any> = [])=>{
 
     let result;
@@ -31,9 +30,21 @@ export const Transformation = (limit:number)=>{
         return size;
 };
 
+export  function isObject<T>(value:T){
+    const type = typeof value;
+    return value!=null && (type == 'object' || type == 'function')
+}
+
+export function isType<T extends Object>(value:T, type:string){
+     return  Object.prototype.toString.call(value) == type;
+}
+
+
 export  function test<T extends String>(value:T) {
     console.log(value.substring(0,1))
 }
+
+
 
 
 type User = {
@@ -48,10 +59,8 @@ export function makeCustomer<T extends User>(u:T):T{
     }
 }
 
-
 function f(a:string,b:string):string;
 function f(a:number,b:number):number;
-
 function f(a: string | number, b: string | number):string | number{
     // if (typeof a === 'string') {
     //     return a + ':' + b; // no error but b can be number!
@@ -64,21 +73,13 @@ function f(a: string | number, b: string | number):string | number{
         return a + b
     }
 }
-
-
 type Foo = {
     a: number;
     b?: string;
     c: boolean;
 }
-
 function getValues<T, K extends keyof T>(obj:T, keys:K[]) {
     return keys.map(key => obj[key])
 }
 
-const obj = {
-    a: 1,
-    b: 2,
-    c: 3
-}
-console.log(getValues(obj, ['a', 'b']))
+

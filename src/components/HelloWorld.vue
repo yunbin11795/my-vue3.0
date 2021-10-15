@@ -23,6 +23,7 @@ import _ from 'lodash';
 import {useStore,mapState} from 'vuex';
 import VirtualList from './VirtualList.vue';
 import {makeCustomer} from '@/unit/filter'
+import {FourClone} from '@/unit/deepClone';
 export default defineComponent({
   name: 'HelloWorld',
   props: {
@@ -37,29 +38,30 @@ export default defineComponent({
     });
 
      const doSomething = inject('abc');
-     console.log(doSomething);
      let value: obj=  reactive({
           name:'',
           age : 0
      });
 
-
      let number = ref(0);
-
      let obj = reactive({count:0})
+
+     let  a:any = {
+        name:'11',
+        aa:[1,2,3],
+     };
+
+     a.a = a;
+     console.time('11');
+     const b =FourClone(a);
+     console.timeEnd('11')
+     console.log(a,b,a.aa === b.aa);
 
       watch(()=>{
         return obj.count;
       },(newValue,oldValue)=>{
           console.log(newValue,oldValue);
       })
-
-       const test = <T extends {}> ()=>{
-         console.log(process.env)
-       };
-
-
-     test();
 
 
      const add = ()=>{
