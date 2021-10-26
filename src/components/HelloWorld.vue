@@ -55,7 +55,7 @@ export default defineComponent({
      console.time('11');
      const b =FourClone(a);
      console.timeEnd('11')
-     console.log(a,b,a.aa === b.aa);
+     console.log(process.env);
 
       watch(()=>{
         return obj.count;
@@ -67,7 +67,11 @@ export default defineComponent({
      const add = ()=>{
        number.value ++;
        obj.count++;
-       console.log(obj);
+
+       const sss:any = {};
+
+       console.log(sss.aa());
+
        content.emit('my-event');
      };
 

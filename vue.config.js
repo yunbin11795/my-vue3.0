@@ -1,4 +1,5 @@
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+const SentryPlugin = require("@sentry/webpack-plugin");
 
 module.exports ={
 
@@ -11,10 +12,19 @@ module.exports ={
     chainWebpack: config => { //webpack 链式调用修改配置
         config
         .when(process.env.NODE_ENV === 'production',
-            config => config.devtool(false),
+            config => config.devtool('source-map'),
             config => config.devtool('source-map')
         )
         .plugin("lodashReplace").use(new LodashModuleReplacementPlugin());
+
+
+        if(process.env.NODE_ENV === 'production'){
+            config.plugin('SentryPlugin')
+                .use(SentryPlugin,[{
+                    release: process.env.VUE_APP_RELEASE,
+                    include: "./dist",
+                }])
+        }
     },
 
     css:{

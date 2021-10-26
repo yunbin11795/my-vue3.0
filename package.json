@@ -8,10 +8,12 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:dev": "vue-cli-service build --mode dev",
-    "start": "vue-cli-service serve",
+    "start": "vue-cli-service serve --mode dev",
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@sentry/tracing": "^6.13.3",
+    "@sentry/vue": "^6.13.3",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.6",
     "element-plus": "^1.0.2-beta.71",
@@ -23,6 +25,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@sentry/webpack-plugin": "^1.18.3",
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.172",
     "@types/mocha": "^5.2.4",
