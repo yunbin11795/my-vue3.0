@@ -75,12 +75,13 @@ export default defineComponent({
      store.commit('test/increment');
      console.log(store.getters['test/doubleCount']);
 
-    console.log(makeCustomer({id:1,kind:'1'}))
+     console.log(makeCustomer({id:1,kind:'1'}))
 
      return {
        number,
        add,
      }
+
   },
 });
 </script>
@@ -88,5 +89,4 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   $primary: #fff;
-
 </style>
