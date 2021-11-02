@@ -5,6 +5,7 @@
     {{msg}}
     <button @click="add()">{{number}}</button>
     <div class="test" ></div>
+    <el-button v-bind="$attrs">默认按钮</el-button>
     <transition name="aan">
     123
     </transition>
@@ -32,7 +33,7 @@ export default defineComponent({
   emit:['my-event'],
   setup(props,content){
 
-
+    console.log(props);
     onMounted(()=>{
       createApp(VirtualList).mount('.test');
     });

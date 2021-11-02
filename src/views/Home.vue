@@ -1,7 +1,8 @@
 <template>
   <div class="home" >
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App" @my-event="doSomething()"></HelloWorld>
+    <HelloWorld msg="Welcome to Your Vue.js App" @my-event="doSomething()" id="555"
+                type="primary"></HelloWorld>
   </div>
 </template>
 
