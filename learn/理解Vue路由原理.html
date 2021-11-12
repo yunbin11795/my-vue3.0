@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>理解Vue路由原理</title>
+</head>
+<body>
+<a href="#test" >测试</a>
+<script>
+    window.onload = function () {
+         function change() {
+             console.log('修改了页面的url的hash')
+         }
+         window.addEventListener('hashchange',change)
+
+        function history() {
+            console.log('修改了页面url的值');
+        }
+
+        window.addEventListener('popstate',history);
+    }
+</script>
+</body>
+</html>

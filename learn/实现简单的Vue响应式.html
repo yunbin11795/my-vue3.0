@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现简单的Vue响应式</title>
+</head>
+<body>
+<div>
+   <span>当前值a:为1</span>
+   <span>当前值b:为10</span>
+</div>
+<script>
+
+    //订阅器
+    class Dep{
+        constructor(){
+            this.subs = new Set();
+        }
+        depend(){
+            if(Dep.target){
+                this.subs.add(Dep.target)
+            }
+        }
+        notify(){
+            this.subs.forEach(sub =>{
+                sub.update();
+            });
+        }
+    }
+    //监听器
+    class Observe{
+
+        constructor(obj){
+
+            const dep = new Dep();
+            Object.keys(obj).forEach(key=>{
+                 let interValue = obj[key];
+                 Object.defineProperty(obj,key,{
+                     get() {
+                         if(Dep.target){
+                             dep.depend();
+                         }
+                         return interValue;
+                     },
+                     set(v){
+                         if(v === interValue){
+                            return;
+                         }
+                         interValue = v;
+                         dep.notify();
+                     }
+                 })
+            })
+        }
+    }
+
+
+
+    //观察者
+    class Watcher{
+        constructor(vm,exp,cb){
+            this.vm = vm;
+            this.exp = exp;
+            this.cb = cb;
+            this.value = this.get();
+        }
+        get(){
+            Dep.target = this;
+            var value = this.vm[this.exp];
+            Dep.target = null;
+            return value;
+        }
+        update(){
+            var value = this.vm[this.exp];
+            var oldVal = this.value;
+            if (value !== oldVal) {
+                this.value = value;
+                this.cb.call(this.vm, value, oldVal);
+            }
+
+        }
+    }
+
+    const state = {
+        a:1
+    };
+     new Observe(state);
+    new Watcher(state,'a',function () {
+         console.log(111);
+    });
+
+    state.a = 2;
+</script>
+</body>
+</html>

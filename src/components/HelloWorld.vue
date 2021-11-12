@@ -18,7 +18,6 @@ interface  obj{
     age :  Number,
 }
 
-
 import { defineComponent ,reactive,inject,ref,createApp,onMounted,watch} from 'vue';
 import _ from 'lodash';
 import {useStore,mapState} from 'vuex';
@@ -79,7 +78,6 @@ export default defineComponent({
      const store =useStore();
      store.commit('test/increment');
      console.log(store.getters['test/doubleCount']);
-
      console.log(makeCustomer({id:1,kind:'1'}))
 
      return {
