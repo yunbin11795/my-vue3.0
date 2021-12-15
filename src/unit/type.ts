@@ -84,11 +84,15 @@ export  function isWindow(obj:any) {
      return fBound;
 };
 
-
+/**
+ * 模拟new 关键字
+ */
 export function objectFactory(){
     let obj:any = {};
+    // 排除第一个构造函数参数
     let Constructor:any = [].shift.call(arguments);
     obj.__proto__ = Constructor.prototype;
+    // 使用apply执行构造函数，将构造函数的属性挂载在res上面
     let ret =Constructor.apply(obj, arguments);
     return typeof ret === 'object' ? ret : obj;
 }

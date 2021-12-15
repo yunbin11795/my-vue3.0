@@ -20,7 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     name:'FileDownload',
     component:  () => import(/* webpackChunkName: "about" */ '../views/FileDownload.vue')
   },
-
+  {
+    path:'/Spider',
+    name:'Spider',
+    component:  () => import(/* webpackChunkName: "about" */ '../views/Spider.vue')
+  }
 ];
 
 const router = createRouter({
