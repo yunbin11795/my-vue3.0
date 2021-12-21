@@ -14,6 +14,7 @@
 <script>
     import {onMounted} from 'vue';
     import {webAssemblyTest} from '../unit/unit'
+    import service from '../service'
     export default {
         name: "Spider",
         setup(){
@@ -26,6 +27,7 @@
            onMounted(()=>{
                 creatFont();
                 test();
+                getData();
             });
 
             const test = async ()=>{
@@ -47,6 +49,12 @@
                  document.head.appendChild(newFontStyleSheet);
             };
 
+            const getData = ()=>{
+                service.get('/rest/portal/aboutUs/getPlatformIntroduction4Com')
+                    .then(res=>{
+                        console.log(res);
+                    })
+            };
 
             return{
                price

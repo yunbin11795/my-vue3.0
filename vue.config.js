@@ -12,7 +12,7 @@ module.exports ={
     chainWebpack: config => { //webpack 链式调用修改配置
         config
         .when(process.env.NODE_ENV === 'production',
-            config => config.devtool('source-map'),
+            config => config.devtool(false),
             config => config.devtool('source-map')
         )
         .plugin("lodashReplace").use(new LodashModuleReplacementPlugin());
@@ -24,6 +24,16 @@ module.exports ={
                     release: process.env.VUE_APP_RELEASE,
                     include: "./dist",
                 }])
+        }
+    },
+
+    configureWebpack: {
+        module: {
+            rules: [{
+                test: /\.mjs$/,
+                include: /node_modules/,
+                type: "javascript/auto"
+            }]
         }
     },
 
@@ -39,7 +49,7 @@ module.exports ={
         open:true,
         proxy:{
             '/rest': {
-                target: 'http://localhost',
+                target: 'https://test.panpartner.com',
                 changeOrigin: true
             },
         }
