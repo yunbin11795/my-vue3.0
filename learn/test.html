@@ -3,27 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../public/css/a11y-dark.min.css">
 </head>
 <body>
-<img src="169f16406d230ffe_tplv-t2oaga2asx-watermark.awebp" />
+<div>
+    <pre>
+       <code class="language-javascript">
+           function(){}
+       </code>
+    </pre>
+</div>
+<script src="../public/js/highlight.min.js"></script>
 <script>
-    Function.prototype.after = function (fn) {
-        var _this = this;
-        return function () {
-            var ret = _this.apply(this.arguments);
-            fn.apply(this, arguments);
-            return ret;
-        };
-    };
-    
-    function a(a) {
-        console.log(a);
-    }
-    function b(b) {
-        console.log(b);
-    }
-    var getUploadObj = a.after(b).after(b)
-    getUploadObj('a');
+    hljs.highlightAll();
+    console.log(hljs);
 </script>
 </body>
 </html>

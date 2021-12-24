@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path:'/Spider',
     name:'Spider',
     component:  () => import(/* webpackChunkName: "about" */ '../views/Spider.vue')
+  },
+  {
+    path:'/EditCompiler',
+    name:'EditCompiler',
+    component:  () => import(/* webpackChunkName: "about" */ '../views/EditCompiler.vue')
   }
 ];
 

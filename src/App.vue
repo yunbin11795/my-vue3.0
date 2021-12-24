@@ -3,7 +3,8 @@
     <router-link to="/about" v-test="4444">About</router-link> |
     <router-link to="/fileDownload">FileDownload</router-link> |
     <router-link to="/">Home</router-link> |
-    <router-link to="/Spider">Spider</router-link>
+    <router-link to="/Spider">Spider</router-link> |
+    <router-link to="/EditCompiler">EditCompiler</router-link>
   </div>
   <router-view></router-view>
 </template>
