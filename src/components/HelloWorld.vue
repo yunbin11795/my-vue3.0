@@ -10,7 +10,6 @@
     123
     </transition>
 
-
   </div>
 </template>
 
@@ -32,12 +31,14 @@ export default defineComponent({
     msg: String,
   },
   emit:['my-event'],
-  setup(props,content){
+  setup(props: any,content: { emit: (arg0: string) => void; }){
 
     console.log(props);
     onMounted(()=>{
       createApp(VirtualList).mount('.test');
     });
+
+    
 
      const doSomething = inject('abc');
      let value: obj=  reactive({
@@ -61,7 +62,7 @@ export default defineComponent({
 
       watch(()=>{
         return obj.count;
-      },(newValue,oldValue)=>{
+      },(newValue: any,oldValue: any)=>{
           console.log(newValue,oldValue);
       })
 
